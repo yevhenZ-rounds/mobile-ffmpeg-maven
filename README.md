@@ -1,6 +1,6 @@
 # mobile-ffmpeg-maven
 
-Maven repository with [MobileFFmpeg](https://github.com/tanersener/mobile-ffmpeg) 4.4 builds for Android.
+[MobileFFmpeg](https://github.com/tanersener/mobile-ffmpeg) 4.4 builds for Android, published for use as Gradle dependencies.
 The original `com.arthenica:mobile-ffmpeg-*` artifacts are no longer resolvable (JCenter shutdown), so they are published here.
 
 - Rebuilt with Android NDK 28
@@ -14,28 +14,42 @@ These artifacts were built from the source code in
 [zixieTools/mobile-ffmpeg-android-16kb](https://github.com/zixieTools/mobile-ffmpeg-android-16kb),
 a fork of [tanersener/mobile-ffmpeg](https://github.com/tanersener/mobile-ffmpeg) (v4.4) adapted to Android NDK 28 and 16KB page alignment.
 
-## Usage
+## Usage (JitPack)
 
 ```gradle
-// settings.gradle (or the root build.gradle)
+// settings.gradle
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+// app/build.gradle
+dependencies {
+    implementation 'com.github.yevhenZ-rounds.mobile-ffmpeg-maven:mobile-ffmpeg-min-16kb:4.4'
+}
+```
+
+Replace `mobile-ffmpeg-min-16kb` with the artifact you need (see below). The Java API is unchanged (`com.arthenica.mobileffmpeg.*`).
+
+### Without JitPack
+
+The same files are available as a plain Maven repository from GitHub, under a different groupId (`com.rounds.android`):
+
+```gradle
 repositories {
     maven {
         url "https://raw.githubusercontent.com/yevhenZ-rounds/mobile-ffmpeg-maven/main"
         content { includeGroup "com.rounds.android" }
     }
 }
-
-// app/build.gradle
 dependencies {
     implementation 'com.rounds.android:mobile-ffmpeg-min-16kb:4.4'
 }
 ```
 
-The Java API is unchanged (`com.arthenica.mobileffmpeg.*`).
-
 ## Artifacts
-
-`groupId`: `com.rounds.android`, `version`: `4.4`
 
 | artifactId | External libraries | License |
 |---|---|---|
@@ -54,6 +68,11 @@ Using a `-gpl` artifact makes your application subject to the GPL.
 
 ## Rules for maintainers
 
-- Published versions are immutable. Gradle caches them; never change the files of an existing version.
+- Published versions are immutable. Gradle and JitPack cache them; never change the files of an existing version or move its tag.
   Publish fixes as a new version (`4.4.1`, ...).
+- To add a version: put the AARs, POMs and checksums under `com/rounds/android/<artifactId>/<version>/`, commit, then push a git tag named like the version.
+  `jitpack.yml` installs every AAR found in that tree and JitPack builds on the first request for the tag.
+- JitPack caches a failed build of a tag. Check a change first with a branch build
+  (`...:mobile-ffmpeg-min-16kb:main-SNAPSHOT`) before tagging.
+- JitPack expects the coordinates of the committed `.pom` files; keep them consistent with `jitpack.yml`.
 - Commit only finished, tested builds. Every version adds its AARs (about 445 MB) to the repository history.
