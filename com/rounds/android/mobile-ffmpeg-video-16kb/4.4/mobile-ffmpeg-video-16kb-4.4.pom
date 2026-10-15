@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.rounds.android</groupId>
+  <artifactId>mobile-ffmpeg-video-16kb</artifactId>
+  <version>4.4</version>
+  <packaging>aar</packaging>
+  <name>mobile-ffmpeg video (16KB page size aligned)</name>
+  <description>MobileFFmpeg 4.4 "video" package for Android, API 24+, rebuilt with NDK 28. Native libraries for arm64-v8a and x86_64 are aligned to 16KB pages. External libraries: fontconfig, freetype, fribidi, kvazaar, libaom, libass, libiconv, libtheora, libvpx, libwebp, snappy.</description>
+  <url>https://github.com/tanersener/mobile-ffmpeg</url>
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License, Version 3</name>
+      <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+</project>
