@@ -1,7 +1,7 @@
 # Publishes the prebuilt AARs stored in this repository on JitPack (no build from source).
-# JitPack scans the repo for .pom files and expects those exact coordinates in ~/.m2,
-# so the groupId here must match the committed POMs (com.rounds.android).
+# JitPack scans the repo for .pom files and expects those exact coordinates (groupId, artifactId,
+# version) in ~/.m2, so every AAR is installed under the coordinates of its own path/POM.
 jdk:
   - openjdk17
 install:
-  - 'for v in min min-gpl https https-gpl audio video full full-gpl; do mvn -B -q install:install-file -Dfile="com/rounds/android/mobile-ffmpeg-$v-16kb/4.4/mobile-ffmpeg-$v-16kb-4.4.aar" -DgroupId=com.rounds.android -DartifactId="mobile-ffmpeg-$v-16kb" -Dversion="$VERSION" -Dpackaging=aar -DgeneratePom=true || exit 1; done'
+  - 'for f in com/rounds/android/*/*/*.aar; do d=$(dirname "$f"); ver=$(basename "$d"); art=$(basename "$(dirname "$d")"); mvn -B -q install:install-file -Dfile="$f" -DgroupId=com.rounds.android -DartifactId="$art" -Dversion="$ver" -Dpackaging=aar -DgeneratePom=true || exit 1; done'
