@@ -8,6 +8,12 @@ The original `com.arthenica:mobile-ffmpeg-*` artifacts are no longer resolvable 
 - **Native libraries for 64-bit ABIs (`arm64-v8a`, `x86_64`) are aligned to 16KB pages**, as required for Android 15+ / Google Play
 - ABIs: `armeabi-v7a`, `arm64-v8a`, `x86`, `x86_64`
 
+## Source
+
+These artifacts were built from the source code in
+[zixieTools/mobile-ffmpeg-android-16kb](https://github.com/zixieTools/mobile-ffmpeg-android-16kb),
+a fork of [tanersener/mobile-ffmpeg](https://github.com/tanersener/mobile-ffmpeg) (v4.4) adapted to Android NDK 28 and 16KB page alignment.
+
 ## Usage
 
 ```gradle

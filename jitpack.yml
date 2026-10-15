@@ -1,0 +1,6 @@
+# Publishes the prebuilt AARs stored in this repository on JitPack (no build from source).
+# Coordinates: com.github.<user>.<repo>:mobile-ffmpeg-<variant>-16kb:<tag>
+jdk:
+  - openjdk17
+install:
+  - 'for v in min min-gpl https https-gpl audio video full full-gpl; do mvn -B -q install:install-file -Dfile="com/rounds/android/mobile-ffmpeg-$v-16kb/4.4/mobile-ffmpeg-$v-16kb-4.4.aar" -DgroupId="$GROUP.$ARTIFACT" -DartifactId="mobile-ffmpeg-$v-16kb" -Dversion="$VERSION" -Dpackaging=aar -DgeneratePom=true || exit 1; done'
